@@ -1,5 +1,9 @@
 package it.unibo.oop.lab.mvcio;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
+
 /**
  * 
  */
@@ -27,5 +31,43 @@ public class Controller {
      * System.getProperty("file.separator"). The combined use of those methods leads
      * to a software that runs correctly on every platform.
      */
+
+    private final String separator = System.getProperty("file.separator");
+    private final String path = System.getProperty("user.home");
+    private File f = new File(path + separator + "output.txt");
+
+    /**
+     * @return the file currently used to write
+     */
+    public File getFile() {
+        return f;
+    }
+
+    /**
+     * @param file
+     *                 sets the file used to write on
+     */
+    public void setFile(final File file) {
+        this.f = file;
+    }
+
+    /**
+     * @return the path currently used to write
+     */
+    public String getPath() {
+        return path;
+    }
+
+    /**
+     * @param words
+     *                  the words written on the file
+     * @throws IOException
+     *                         if PrintWriter throws the exception
+     */
+    public void writeOnFile(final String words) throws IOException {
+        try (PrintWriter out = new PrintWriter(f)) {
+            out.println(words);
+        }
+    }
 
 }
