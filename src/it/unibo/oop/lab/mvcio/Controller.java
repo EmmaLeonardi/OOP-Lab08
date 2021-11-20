@@ -34,7 +34,8 @@ public class Controller {
 
     private final String separator = System.getProperty("file.separator");
     private final String path = System.getProperty("user.home");
-    private File f = new File(path + separator + "output.txt");
+    private final String file = "output.txt";
+    private File f = new File(this.getPath());
 
     /**
      * @return the file currently used to write
@@ -55,7 +56,7 @@ public class Controller {
      * @return the path currently used to write
      */
     public String getPath() {
-        return path;
+        return path + separator + file;
     }
 
     /**
