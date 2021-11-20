@@ -32,10 +32,7 @@ public class Controller {
      * to a software that runs correctly on every platform.
      */
 
-    private final String separator = System.getProperty("file.separator");
-    private final String path = System.getProperty("user.home");
-    private final String file = "output.txt";
-    private File f = new File(this.getPath());
+    private File f = new File(System.getProperty("user.home") + System.getProperty("file.separator") + "output.txt");
 
     /**
      * @return the file currently used to write
@@ -56,7 +53,7 @@ public class Controller {
      * @return the path currently used to write
      */
     public String getPath() {
-        return path + separator + file;
+        return f.getAbsolutePath();
     }
 
     /**
