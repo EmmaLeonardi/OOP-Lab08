@@ -1,5 +1,7 @@
 package it.unibo.oop.lab.mvc;
 
+import java.util.List;
+
 /**
  * A controller that prints strings and has memory of the strings it printed.
  */
@@ -25,4 +27,35 @@ public interface Controller {
      * 
      */
 
+    /**
+     * @param s
+     *              the next string to print
+     * @throws IllegalArgumentException
+     *                                      if the argument is null
+     * 
+     *                                      Sets the next string to be printed
+     */
+    void setNextString(String s);
+
+    /**
+     * @return the next string to print
+     * 
+     *         Get the next string to be printed
+     */
+    String getNextString();
+
+    /**
+     * @return a List of Strings that have been printed
+     * 
+     *         The history of strings that have been printed
+     */
+    List<String> historyOfStringsPrinted();
+
+    /**
+     * @throws IllegalStateException
+     *                                   if the string to print is unset
+     * 
+     *                                   Prints the next string
+     */
+    void printNextString();
 }
