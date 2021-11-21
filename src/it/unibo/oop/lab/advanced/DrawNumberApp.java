@@ -1,20 +1,26 @@
 package it.unibo.oop.lab.advanced;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 /**
  */
 public final class DrawNumberApp implements DrawNumberViewObserver {
 
-    private static final int MIN = 0;
-    private static final int MAX = 100;
-    private static final int ATTEMPTS = 10;
     private final DrawNumber model;
     private final DrawNumberView view;
+    private final String s = System.getProperty("file.separator");
+    private final File settings = new File(new File("").getAbsolutePath() + s + "res" + s + "config.yml");
 
     /**
+     * Imports configurations from res/config.yml.
      * 
+     * @throws IOException
+     * @throws FileNotFoundException
      */
-    public DrawNumberApp() {
-        this.model = new DrawNumberImpl(MIN, MAX, ATTEMPTS);
+    public DrawNumberApp() throws FileNotFoundException, IOException {
+        this.model = new DrawNumberImpl(settings);
         this.view = new DrawNumberViewImpl();
         this.view.setObserver(this);
         this.view.start();
@@ -44,10 +50,19 @@ public final class DrawNumberApp implements DrawNumberViewObserver {
 
     /**
      * @param args
-     *            ignored
+     *                 ignored
      */
     public static void main(final String... args) {
-        new DrawNumberApp();
+        try {
+            // System.out.println(new File("").getAbsolutePath());
+            // System.out.println(new File(new File("").getAbsolutePath() +
+            // System.getProperty("file.separator") + "res"
+            // + System.getProperty("file.separator") + "config.yml").getAbsolutePath());
+            // System.out.println(prova2.getAbsolutePath());
+            new DrawNumberApp();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }
