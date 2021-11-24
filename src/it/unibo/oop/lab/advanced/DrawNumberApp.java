@@ -3,13 +3,15 @@ package it.unibo.oop.lab.advanced;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  */
 public final class DrawNumberApp implements DrawNumberViewObserver {
 
     private final DrawNumber model;
-    private final DrawNumberView view;
+    private final List<DrawNumberView> listView = new LinkedList<>();
     private final String s = System.getProperty("file.separator");
     private final File settings = new File("res" + s + "config.yml");
 
@@ -21,20 +23,28 @@ public final class DrawNumberApp implements DrawNumberViewObserver {
      */
     public DrawNumberApp() throws FileNotFoundException, IOException {
         this.model = new DrawNumberImpl(settings);
-        this.view = new DrawNumberViewImpl();
-        this.view.setObserver(this);
-        this.view.start();
+
+        this.listView.add(new DrawNumberViewImpl());
+        this.listView.add(new DrawNumberViewOnFile());
+        this.listView.add(new DrawNumberViewOnStdout());
+        for (final DrawNumberView view : listView) {
+            view.setObserver(this);
+            view.start();
+        }
+
     }
 
     @Override
     public void newAttempt(final int n) {
-        try {
-            final DrawResult result = model.attempt(n);
-            this.view.result(result);
-        } catch (IllegalArgumentException e) {
-            this.view.numberIncorrect();
-        } catch (AttemptsLimitReachedException e) {
-            view.limitsReached();
+        for (final DrawNumberView view : listView) {
+            try {
+                final DrawResult result = model.attempt(n);
+                view.result(result);
+            } catch (IllegalArgumentException e) {
+                view.numberIncorrect();
+            } catch (AttemptsLimitReachedException e) {
+                view.limitsReached();
+            }
         }
     }
 
