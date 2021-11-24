@@ -41,6 +41,7 @@ public class DrawNumberViewOnFile implements DrawNumberView {
     @Override
     public void start() {
         out.println("Started game!");
+        out.flush();
 
     }
 
@@ -50,6 +51,7 @@ public class DrawNumberViewOnFile implements DrawNumberView {
     @Override
     public void numberIncorrect() {
         out.println("Incorrect number, try again");
+        out.flush();
 
     }
 
@@ -62,14 +64,17 @@ public class DrawNumberViewOnFile implements DrawNumberView {
         case YOURS_HIGH:
         case YOURS_LOW:
             out.println(res.getDescription());
+            out.flush();
             return;
         case YOU_WON:
             out.println(res.getDescription());
+            out.flush();
             break;
         default:
             throw new IllegalStateException("Unexpected result: " + res);
         }
         out.println("A new game starts!");
+        out.flush();
     }
 
     /**
@@ -78,6 +83,7 @@ public class DrawNumberViewOnFile implements DrawNumberView {
     @Override
     public void limitsReached() {
         out.println("You lost");
+        out.flush();
 
     }
 
@@ -87,6 +93,7 @@ public class DrawNumberViewOnFile implements DrawNumberView {
     @Override
     public void displayError(final String message) {
         out.println("Error: " + message);
+        out.flush();
 
     }
 
