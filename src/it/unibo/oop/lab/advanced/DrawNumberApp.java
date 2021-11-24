@@ -11,7 +11,7 @@ public final class DrawNumberApp implements DrawNumberViewObserver {
     private final DrawNumber model;
     private final DrawNumberView view;
     private final String s = System.getProperty("file.separator");
-    private final File settings = new File(new File("").getAbsolutePath() + s + "res" + s + "config.yml");
+    private final File settings = new File("res" + s + "config.yml");
 
     /**
      * Imports configurations from res/config.yml.
@@ -54,11 +54,6 @@ public final class DrawNumberApp implements DrawNumberViewObserver {
      */
     public static void main(final String... args) {
         try {
-            // System.out.println(new File("").getAbsolutePath());
-            // System.out.println(new File(new File("").getAbsolutePath() +
-            // System.getProperty("file.separator") + "res"
-            // + System.getProperty("file.separator") + "config.yml").getAbsolutePath());
-            // System.out.println(prova2.getAbsolutePath());
             new DrawNumberApp();
         } catch (IOException e) {
             e.printStackTrace();
