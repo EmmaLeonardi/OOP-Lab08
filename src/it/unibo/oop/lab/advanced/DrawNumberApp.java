@@ -36,16 +36,22 @@ public final class DrawNumberApp implements DrawNumberViewObserver {
 
     @Override
     public void newAttempt(final int n) {
-        for (final DrawNumberView view : listView) {
-            try {
-                final DrawResult result = model.attempt(n);
-                view.result(result);
-            } catch (IllegalArgumentException e) {
-                view.numberIncorrect();
-            } catch (AttemptsLimitReachedException e) {
+        DrawResult result;
+        try {
+            result = model.attempt(n);
+            for (final DrawNumberView view : listView) {
+                try {
+                    view.result(result);
+                } catch (IllegalArgumentException e) {
+                    view.numberIncorrect();
+                }
+            }
+        } catch (AttemptsLimitReachedException e1) {
+            for (final DrawNumberView view : listView) {
                 view.limitsReached();
             }
         }
+
     }
 
     @Override
