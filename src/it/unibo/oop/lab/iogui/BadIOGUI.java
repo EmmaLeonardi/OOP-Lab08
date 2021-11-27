@@ -85,15 +85,6 @@ public class BadIOGUI {
                     e1.printStackTrace();
                 }
 
-                // try (InputStream ps = new FileInputStream(PATH); DataInputStream ps2 = new
-                // DataInputStream(ps);) {
-                // System.out.println(ps2.readInt() + " ");
-                // } catch (IOException e3) {
-                // JOptionPane.showMessageDialog(frame, e3, "Error IO exception",
-                // JOptionPane.ERROR_MESSAGE);
-                // e3.printStackTrace();
-                // }
-
             }
         });
 
